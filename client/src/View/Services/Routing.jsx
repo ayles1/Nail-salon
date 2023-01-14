@@ -5,19 +5,22 @@ import {
     RouterProvider,
   } from "react-router-dom";
 import App from "../Components/App";
-import EnrollModal from "../Components/Enroll/EnrollModal";
+import ConfirmationAlert from "../Components/Enroll/ConfirmationAlert";
+import EnrollModal, {action as enrollAction} from "../Components/Enroll/EnrollModal";
 import WriteReviewModal from "../Components/RatingTab/WriteReviewModal";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/enroll" element={<EnrollModal/>}/>
+      <Route path="/enroll" action={enrollAction} element={<EnrollModal/>}/>
+      <Route path="/confirmation" element={<ConfirmationAlert/>}/>
       <Route path="postreview" element={<WriteReviewModal/>}/>
     </Route>
     )
     );
     
+
     const Routing = ({children}) =>{
     return (
       <RouterProvider router={router}>{children}</RouterProvider>

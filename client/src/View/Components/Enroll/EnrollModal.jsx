@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import {  Form, useNavigate } from "react-router-dom"
+import {  Form, Link, redirect, useNavigate } from "react-router-dom"
 
-import { Box, Button, Modal, Typography } from '@mui/material'
+import { Alert, Box, Button, Modal, Snackbar, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material';
 import AdditionalsList from './Additional.services-list';
 import ComplexList from './Complex.services-list';
@@ -11,7 +11,9 @@ import PedicureList from './Pedicure.services-list';
 
 import { enrollController } from '../../../Controllers/Enroll/enroll.controller';
 
-
+export function action(){
+  return redirect('/confirmation')
+}
 
 const style = {
   position: 'absolute',
@@ -36,6 +38,7 @@ const EnrollModal = () => {
     //maybe some other features one day
     navigation(-1)
   }
+  
   return (
     <Modal
     sx={{overflow:'auto'}}
@@ -74,18 +77,16 @@ const EnrollModal = () => {
         },0),0)}`}</div>
         :null
       }
-      
-    <Button onClick={async (e)=>{
-      e.preventDefault()
+    <Button type="submit" onClick={async (e)=>{
       //Подтверждение записи, отправка на бекэнд
-      await enrollController.saveServicesListDB(servicesList)
+      // await enrollController.saveServicesListDB(servicesList)
       // Добавить алерт спасибо за запись и редирект на "/"
       // handleWindowClose()
     }} variant='contained'>
+      {/* <Link to="/confirmation">Подтвердить</Link> */}
       Подтвердить
       </Button>
     </Form>
-   
   </Box>
 </Modal>
   )
