@@ -27,16 +27,13 @@ const style = {
 
 const EnrollModal = () => {
   const navigation = useNavigate()
-  const [servicesList, setServicesList] = useState(enrollController.servicesList)
-  console.log("Mount  ",  servicesList)
+  const [servicesList, setServicesList] = useState([])
 
   function toggleServicesList (item) {
   setServicesList((list)=>list.concat(item))
   }
   function handleWindowClose(){
-    enrollController.saveServicesListSession(servicesList)
-    setServicesList(enrollController.servicesList)
-    console.log(`Лист сервисов ${servicesList}`)
+    //maybe some other features one day
     navigation(-1)
   }
   return (
@@ -83,7 +80,7 @@ const EnrollModal = () => {
       //Подтверждение записи, отправка на бекэнд
       await enrollController.saveServicesListDB(servicesList)
       // Добавить алерт спасибо за запись и редирект на "/"
-      handleWindowClose()
+      // handleWindowClose()
     }} variant='contained'>
       Подтвердить
       </Button>

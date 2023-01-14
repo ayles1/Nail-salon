@@ -1,13 +1,4 @@
 class EnrollController {
-  servicesList = JSON.parse(sessionStorage.getItem("ServicesList")) || [];
-
-  saveServicesListSession(list) {
-    console.log(list.length, " list length");
-    list.length
-      ? sessionStorage.setItem("ServicesList", JSON.stringify(list))
-      : sessionStorage.removeItem("ServicesList");
-  }
-
   async saveServicesListDB(list) {
     const res = await fetch("http://localhost:8000/test", {
       method: "POST",
