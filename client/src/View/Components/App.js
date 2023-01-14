@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import { useScroll } from "../Services/Scrolling";
+import { useScroll } from "../Services/Scrolling.service";
 
 import { Container, Box } from "@mui/system";
 import * as Components from "./index.js";

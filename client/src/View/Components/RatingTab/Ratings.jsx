@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { useScroll } from '../../Services/Scrolling'
+import { useScroll } from '../../Services/Scrolling.service'
 
 import { Box, Tab, Tabs, Typography } from '@mui/material'
 import ReviewItem from './ReviewItem'
 import ToggleRatingsButton from './ToggleRatingsButton'
+import ReviewItemList from './ReviewItemList'
+import { useNavigate } from 'react-router-dom'
 
 
 const TabPanel = (props) =>{
@@ -20,19 +22,20 @@ const TabPanel = (props) =>{
 
 const Ratings = () => {
   const [showAllReviews, setShowAllReviews] = useState(false)
-  const [reviews, setReviews] = useState(['fef', 'efle;', 'wgk', 'kw;we', 'wkf;wk', 1,4,5,7,9,0,3,6,3])
   
-  const {componentsRefs} = useScroll()
   const [value,setValue] = useState(0)
+  const {componentsRefs} = useScroll()
+  const navigate = useNavigate()
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
   function toggleAllReviews () {
+    showAllReviews === false || navigate(-1)
     setShowAllReviews((prev) => !prev)
   }
   return (
-   <Box ref={componentsRefs.ratings} sx={{border:'1px' ,borderColor:'divider', display:'flex', flexDirection:'column', alignItems:'center', margin:'100px 0 0 0'}}>
+   <Box  ref={componentsRefs.ratings} sx={{border:'1px' ,borderColor:'divider', display:'flex', flexDirection:'column', alignItems:'center', margin:'100px 0 0 0'}}>
      <Typography component="h1" variant='h4' sx={{fontSize:"45px",marginBottom:'30px'}}>Отзывы</Typography>
       <Tabs onChange={handleChange} value={value}>
         <Tab
@@ -45,12 +48,11 @@ const Ratings = () => {
       </Tabs>
       <TabPanel value={value} index={0}>
         <div>Last 2 reviews</div>
+
         {/* Link to all reviews is here */}
-        <ToggleRatingsButton value={"Показать все"} linkTo='showAllReviews' onClick={toggleAllReviews}/>
+        <ToggleRatingsButton value={"Показать все"} linkTo='#reviews' onClick={toggleAllReviews}/>
         {showAllReviews?(
-          reviews.map((review, index,array)=>{
-            return <ReviewItem key={index}/>
-          })
+          <ReviewItemList/>
         ):null}
         <div>Уже были у меня? Напишите отзыв!</div>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useScroll } from '../Services/Scrolling'
+import { useScroll } from '../Services/Scrolling.service'
 
 import { Box, Grow, ImageList, ImageListItem, Typography } from '@mui/material'
 import { images } from '../../assets/img/index.js'

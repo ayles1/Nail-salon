@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useScroll } from '../Services/Scrolling'
+import { useScroll } from '../Services/Scrolling.service'
 
 import { Close, Dehaze } from '@mui/icons-material'
 import { Box, Typography, useMediaQuery } from '@mui/material'

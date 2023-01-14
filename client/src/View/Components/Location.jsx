@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useScroll } from '../Services/Scrolling'
+import { useScroll } from '../Services/Scrolling.service'
 
 import { Box, Typography } from '@mui/material'
 import EnrollButton from './Enroll/EnrollButton'
