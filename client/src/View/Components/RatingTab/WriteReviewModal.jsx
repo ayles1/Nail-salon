@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Button, Input, Modal, Typography } from '@mui/material';
+import { reviewController } from '../../../Controllers/Review/review.controller';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -32,9 +33,15 @@ const WriteReviewModal = ({open, handleClose}) => {
       Оставьте отзыв
     </Typography>
     <Input onChange={(e)=>handleTextChange(e)}/>
-    <Button variant="outlined" onClick={()=>{
+    <Button variant="outlined" onClick={async ()=>{
       //Отправка отзыва на бэкенд
-      handleClose()
+      //Доделать здесь !!!!!
+      await reviewController.sendReview({
+        rating:5,
+        text:reviewText,
+        date: Date.now()
+      })
+      // handleClose()
       
     }}>Отправить</Button>
   </Box>

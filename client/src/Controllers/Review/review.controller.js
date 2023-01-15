@@ -7,12 +7,14 @@ class ReviewController {
     console.log(reviews);
     return reviews;
   }
-  async postReview(data) {
-    const res = await fetch("http://localhost:8000/reviews", {
+  async sendReview(data) {
+    console.log("Data: ", data);
+    const res = await fetch("http://localhost:8000/reviews/send", {
       method: "POST",
+      headers: { "Content-Type": "application/json;charset=utf-8" },
       body: JSON.stringify(data),
     });
-    const review = res.json();
+    const review = await res.json();
     console.log(review);
   }
   reviews;

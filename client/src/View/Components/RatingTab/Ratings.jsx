@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import { useScroll } from '../../Services/Scrolling.service'
 
 import { Box, Tab, Tabs, Typography } from '@mui/material'
-import ReviewItem from './ReviewItem'
+import ReviewItem from './Review'
 import ToggleRatingsButton from './ToggleRatingsButton'
-import ReviewItemList from './ReviewItemList'
+import ReviewItemList from './ReviewList'
 import { useNavigate } from 'react-router-dom'
+import AvitoReviewList from './AvitoReviewList'
 
 
 const TabPanel = (props) =>{
@@ -31,26 +32,32 @@ const Ratings = () => {
   }
 
   function toggleAllReviews () {
-    showAllReviews === false || navigate(-1)
+    showAllReviews === false || navigate("#reviews")
     setShowAllReviews((prev) => !prev)
   }
   return (
    <Box  ref={componentsRefs.ratings} sx={{border:'1px' ,borderColor:'divider', display:'flex', flexDirection:'column', alignItems:'center', margin:'100px 0 0 0'}}>
      <Typography component="h1" variant='h4' sx={{fontSize:"45px",marginBottom:'30px'}}>Отзывы</Typography>
+
+      {/* Tabs and their routings declaration */}
       <Tabs onChange={handleChange} value={value}>
         <Tab
         label='Этот сайт'
+        onClick={()=>navigate('/#reviews/this-site')}
         >
         </Tab>
         <Tab
         label="Avito"
+        onClick={()=>navigate('/#reviews/avito')}
         />
       </Tabs>
+
+      {/* Tabs realization */}
       <TabPanel value={value} index={0}>
         <div>Last 2 reviews</div>
 
         {/* Link to all reviews is here */}
-        <ToggleRatingsButton value={"Показать все"} linkTo='#reviews' onClick={toggleAllReviews}/>
+        <ToggleRatingsButton value={"Показать все"} linkTo='#reviews/this-site' onClick={toggleAllReviews}/>
         {showAllReviews?(
           <ReviewItemList/>
         ):null}
@@ -61,7 +68,7 @@ const Ratings = () => {
 
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Goodbye geys
+        <AvitoReviewList/>
       </TabPanel>
     </Box>
   )
