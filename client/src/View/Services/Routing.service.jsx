@@ -6,7 +6,7 @@ import {
   } from "react-router-dom";
 import App from "../Components/App";
 import ConfirmationAlert from "../Components/UI/ConfirmationAlert";
-import EnrollModal, {action as enrollAction} from "../Components/Enroll/EnrollModal";
+import EnrollModal from "../Components/Enroll/EnrollModal";
 import AvitoReviewList from "../Components/RatingTab/AvitoReviewList";
 import ReviewItemList from "../Components/RatingTab/ReviewList";
 import WriteReviewModal from "../Components/RatingTab/WriteReviewModal";
@@ -15,7 +15,7 @@ import WriteReviewModal from "../Components/RatingTab/WriteReviewModal";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/enroll" action={enrollAction} element={<EnrollModal/>}/>
+      <Route path="/enroll" element={<EnrollModal/>}/>
       <Route path="/confirmation/:type" element={<ConfirmationAlert/>}/>
       <Route path="postreview"  element={<WriteReviewModal/>}/>
       <Route path="#reviews" element={<ReviewItemList/>}>

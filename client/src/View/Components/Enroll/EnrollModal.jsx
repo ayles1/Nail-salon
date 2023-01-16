@@ -11,9 +11,7 @@ import PedicureList from './Pedicure.services-list';
 
 import { enrollController } from '../../../Controllers/Enroll/enroll.controller';
 
-export function action(){
-  return redirect('/confirmation/enroll')
-}
+
 
 const style = {
   position: 'absolute',
@@ -79,6 +77,7 @@ const EnrollModal = () => {
       }
     <Button type="submit" onClick={async (e)=>{
       //Подтверждение записи, отправка на бекэнд
+      navigation("/confirmation/enroll")
       // await enrollController.saveServicesListDB(servicesList)
       // Изменить редирект на следующий таб с телефоном именем и датой
       // handleWindowClose()
