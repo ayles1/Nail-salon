@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useScroll } from '../../Services/Scrolling.service'
 
 import { Box, Tab, Tabs, Typography } from '@mui/material'
-import ReviewItem from './Review'
 import ToggleRatingsButton from './ToggleRatingsButton'
 import ReviewItemList from './ReviewList'
 import { useNavigate } from 'react-router-dom'
@@ -22,7 +21,6 @@ const TabPanel = (props) =>{
 }
 
 const Ratings = () => {
-  const [showAllReviews, setShowAllReviews] = useState(false)
   
   const [value,setValue] = useState(0)
   const {componentsRefs} = useScroll()
@@ -31,10 +29,10 @@ const Ratings = () => {
     setValue(newValue)
   }
 
-  function toggleAllReviews () {
-    showAllReviews === false || navigate("#reviews")
-    setShowAllReviews((prev) => !prev)
-  }
+  // function toggleAllReviews () {
+  //   showAllReviews === false || navigate("#reviews")
+  //   setShowAllReviews((prev) => !prev)
+  // }
   return (
    <Box  ref={componentsRefs.ratings} sx={{border:'1px' ,borderColor:'divider', display:'flex', flexDirection:'column', alignItems:'center', margin:'100px 0 0 0'}}>
      <Typography component="h1" variant='h4' sx={{fontSize:"45px",marginBottom:'30px'}}>Отзывы</Typography>
@@ -54,13 +52,7 @@ const Ratings = () => {
 
       {/* Tabs realization */}
       <TabPanel value={value} index={0}>
-        <div>Last 2 reviews</div>
-
-        {/* Link to all reviews is here */}
-        <ToggleRatingsButton value={"Показать все"} linkTo='#reviews/this-site' onClick={toggleAllReviews}/>
-        {showAllReviews?(
           <ReviewItemList/>
-        ):null}
         <div>Уже были у меня? Напишите отзыв!</div>
 
         {/* Link to review modal is there */}

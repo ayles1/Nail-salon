@@ -1,15 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { reviewController } from '../../../Controllers/Review/review.controller'
 
 import ReviewItem from './Review'
+import ToggleRatingsButton from './ToggleRatingsButton'
 
 const ReviewItemList = () => {
+  const [reviews,setReviews] = useState([])
+  const [lastReviews, setLastReviews] = useState([])
+  const [showAllReviews, setShowAllReviews] = useState(false)
 
-  const [reviews, setReviews] = useState(['fef', 'efle;', 'wgk', 'kw;we', 'wkf;wk', 1,4,5,7,9,0,3,6,3])
+  useEffect(()=>{
+      reviewController.getReviews()
+      .then((res)=>{
+        setReviews(res.reverse())
+        setLastReviews(res.slice(0,2))
+      })
+  },[])
 
   return (
-    reviews.map((review, index,array)=>{
-        return <ReviewItem key={index}/>
-      })
+    <>
+    {!showAllReviews
+    ?lastReviews.map((review,index)=>{
+      return <ReviewItem review={review} key={index}/>
+    })
+    :reviews.map((review, index,array)=>{
+      return <ReviewItem review={review} key={index}/>
+    })}
+    {/* Link to all reviews is here */}
+    <ToggleRatingsButton value={!showAllReviews?"Показать все":"Закрыть"} linkTo='#reviews/this-site' onClick={()=>setShowAllReviews((prev)=>!prev)}/>
+    </>
   )
 }
 

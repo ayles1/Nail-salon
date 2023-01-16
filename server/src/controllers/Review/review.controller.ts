@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import Review from "../../db/schemas/Review";
 import { BaseController } from "../base.controller";
 import { ReviewSendDto } from "./dataTransferObject/review-send-dto";
@@ -12,6 +12,11 @@ export class ReviewController extends BaseController implements IReviewControlle
             path:'/send',
             method:'post',
             func: this.send
+         },
+         {
+            path:'/get',
+            method:'get',
+            func:this.get
          }
       ])
    }
@@ -23,10 +28,21 @@ export class ReviewController extends BaseController implements IReviewControlle
             date:req.body.date
          })
          const post = await doc.save()
-         res.json(post)
+         const response = await res.json(post)
+         console.log(response)
       } catch (error) {
          if(error instanceof Error){
             console.error(error)
+         }
+      }
+   }
+   public async get (req:Request, res:Response){
+      try {
+         const reviews = await Review.find().exec()
+         res.json(reviews)
+      } catch (error) {
+         if(error instanceof Error){
+            console.log(error.message)
          }
       }
    }

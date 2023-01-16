@@ -1,14 +1,12 @@
 class ReviewController {
   async getReviews() {
-    const res = await fetch("http://localhost:8000/reviews", {
+    const res = await fetch("http://localhost:8000/reviews/get", {
       method: "GET",
     });
-    const reviews = res.json();
-    console.log(reviews);
+    const reviews = await res.json();
     return reviews;
   }
   async sendReview(data) {
-    console.log("Data: ", data);
     const res = await fetch("http://localhost:8000/reviews/send", {
       method: "POST",
       headers: { "Content-Type": "application/json;charset=utf-8" },

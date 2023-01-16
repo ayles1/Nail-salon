@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import { useNavigate } from 'react-router-dom';
+import { Form, redirect, useNavigate } from 'react-router-dom';
 
-import { Box, Button, Input, Modal, Typography } from '@mui/material';
+import { Box, Button, Input, Modal, Rating, TextField, Typography } from '@mui/material';
 import { reviewController } from '../../../Controllers/Review/review.controller';
 const style = {
     position: 'absolute',
@@ -15,8 +15,14 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
+
+export function action(){
+    return redirect('/confirmation')
+  }
+  
 const WriteReviewModal = ({open, handleClose}) => {
   const [reviewText, setReviewText] = useState('')
+  const [rating, setRating] = useState(0)
   const navigate = useNavigate()
   function handleTextChange (event) {
     setReviewText(event.target.value)
@@ -32,18 +38,30 @@ const WriteReviewModal = ({open, handleClose}) => {
     <Typography id="modal-modal-title" variant="h6" component="h2">
       Оставьте отзыв
     </Typography>
-    <Input onChange={(e)=>handleTextChange(e)}/>
-    <Button variant="outlined" onClick={async ()=>{
+    <Form method='post'>
+    <TextField sx={{margin:'20px 0'}} focused multiline minRows={5} maxRows={10} fullWidth onChange={(e)=>handleTextChange(e)}/>
+    <div>
+      <Typography component="legend">Ваша оценка :</Typography>
+      <Rating
+        name="simple-controlled"
+        value={rating}
+        onChange={(event, newValue) => {
+        setRating(newValue);
+      }}
+      />
+    </div>
+    <Button type="submit" sx={{marginTop:'10px'}} variant="outlined" onClick={async ()=>{
       //Отправка отзыва на бэкенд
       //Доделать здесь !!!!!
       await reviewController.sendReview({
-        rating:5,
+        rating,
         text:reviewText,
         date: Date.now()
       })
       // handleClose()
       
     }}>Отправить</Button>
+    </Form>
   </Box>
 </Modal>
   )

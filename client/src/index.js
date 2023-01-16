@@ -9,13 +9,11 @@ import Routing from "./View/Services/Routing.service";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ColorModeProvider>
-      <ScrollingProvider>
-        <Routing>
-          <App />
-        </Routing>
-      </ScrollingProvider>
-    </ColorModeProvider>
-  </React.StrictMode>
+  <ColorModeProvider>
+    <ScrollingProvider>
+      <Routing>
+        <App />
+      </Routing>
+    </ScrollingProvider>
+  </ColorModeProvider>
 );
