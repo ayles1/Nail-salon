@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { Form, redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Box, Button, Input, Modal, Rating, TextField, Typography } from '@mui/material';
+import { Box, Button, Modal, Rating, TextField, Typography } from '@mui/material';
 import { reviewController } from '../../../Controllers/Review/review.controller';
-const style = {
+import { validateReviewText, validateReviewRating } from '../../../Validations/Review.validation';
+
+const modalStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -16,14 +18,15 @@ const style = {
     p: 4,
   };
 
-export function action(){
-    return redirect('/confirmation')
-  }
+
   
-const WriteReviewModal = ({open, handleClose}) => {
+const WriteReviewModal = () => {
   const [reviewText, setReviewText] = useState('')
   const [rating, setRating] = useState(0)
+  const [isValidText, setIsValidText] = useState(true)
+  const [isValidRating, setIsValidRating] = useState(true)
   const navigate = useNavigate()
+
   function handleTextChange (event) {
     setReviewText(event.target.value)
   }
@@ -34,34 +37,64 @@ const WriteReviewModal = ({open, handleClose}) => {
     navigate(-1)
   }}
   >
-  <Box sx={style}>
+  <Box sx={modalStyle}>
     <Typography id="modal-modal-title" variant="h6" component="h2">
       Оставьте отзыв
     </Typography>
-    <Form method='post'>
-    <TextField sx={{margin:'20px 0'}} focused multiline minRows={5} maxRows={10} fullWidth onChange={(e)=>handleTextChange(e)}/>
+    <form method='post'>
+    <TextField 
+    sx={{margin:'20px 0'}} 
+    error={!isValidText} 
+    helperText={isValidText?null:"Неверный формат текста"} 
+    name="text" 
+    focused 
+    multiline 
+    minRows={5} 
+    maxRows={10} 
+    fullWidth 
+    onChange={(e)=>handleTextChange(e)}
+    />
     <div>
       <Typography component="legend">Ваша оценка :</Typography>
       <Rating
-        name="simple-controlled"
+        name="rating"
         value={rating}
         onChange={(event, newValue) => {
         setRating(newValue);
       }}
       />
+      {!isValidRating
+        ?<div style={{color:'red'}}>Укажите рейтинг</div>
+        :null}
     </div>
-    <Button type="submit" sx={{marginTop:'10px'}} variant="outlined" onClick={async ()=>{
-      //Отправка отзыва на бэкенд
-      //Доделать здесь !!!!!
-      await reviewController.sendReview({
-        rating,
-        text:reviewText,
-        date: Date.now()
-      })
-      // handleClose()
+    <Button type="submit"  sx={{marginTop:'10px'}} variant="outlined" onClick={ async (e)=>{
+      e.preventDefault()
+      //Results of validations
+      const validText = validateReviewText(reviewText) 
+      const validRating = validateReviewRating(rating)
       
+      if(validText && validRating){          //Correct validation
+        navigate('/confirmation/review')
+        await reviewController.sendReview({
+          rating,
+          text:reviewText,
+          date: Date.now()
+        })
+      }
+      else if(validText && !validRating){   //Rating incorrect
+        setIsValidText(true)  
+        setIsValidRating(false)
+      }
+      else if(!validText && validRating){    //Text incorrect
+        setIsValidRating(true)
+        setIsValidText(false)
+      }
+      else{
+        setIsValidRating(false)
+        setIsValidText(false)
+      } 
     }}>Отправить</Button>
-    </Form>
+    </form>
   </Box>
 </Modal>
   )

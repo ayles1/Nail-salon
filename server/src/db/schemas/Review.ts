@@ -6,7 +6,9 @@ const ReviewSchema = new mongoose.Schema(
             type:Number
         },
         text:{
-            type: String
+            type: String,
+            unique:true,
+            required:true
         },
         date:{
             type: Date

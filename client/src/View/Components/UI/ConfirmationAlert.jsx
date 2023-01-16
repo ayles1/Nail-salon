@@ -1,12 +1,19 @@
 import React from 'react'
 
-import { useNavigate } from "react-router-dom"
+import { useLoaderData, useNavigate, useParams } from "react-router-dom"
 
 import { Alert, Snackbar } from '@mui/material'
 import { Box } from '@mui/system'
 
 
 const ConfirmationAlert = () => {
+  const data = useParams()
+  const text = 
+  data.type === "enroll"
+  ?'Запись подтверждена, жду вас ждать!)'
+  :data.type === "review"
+  ?'Отзыв опубликован, спасибо)'
+  :'Спасибо'
     const navigate = useNavigate()
    setTimeout(()=>{
     navigate("/")
@@ -14,7 +21,7 @@ const ConfirmationAlert = () => {
   return (
     <Box>
         <Snackbar open>
-            <Alert severity="success">Спасибо!</Alert>
+            <Alert severity="success">{text}</Alert>
         </Snackbar>
     </Box>
   )

@@ -28,8 +28,7 @@ export class ReviewController extends BaseController implements IReviewControlle
             date:req.body.date
          })
          const post = await doc.save()
-         const response = await res.json(post)
-         console.log(response)
+         res.json(post)
       } catch (error) {
          if(error instanceof Error){
             console.error(error)

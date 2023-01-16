@@ -12,7 +12,7 @@ import PedicureList from './Pedicure.services-list';
 import { enrollController } from '../../../Controllers/Enroll/enroll.controller';
 
 export function action(){
-  return redirect('/confirmation')
+  return redirect('/confirmation/enroll')
 }
 
 const style = {
@@ -80,7 +80,7 @@ const EnrollModal = () => {
     <Button type="submit" onClick={async (e)=>{
       //Подтверждение записи, отправка на бекэнд
       // await enrollController.saveServicesListDB(servicesList)
-      // Добавить алерт спасибо за запись и редирект на "/"
+      // Изменить редирект на следующий таб с телефоном именем и датой
       // handleWindowClose()
     }} variant='contained'>
       {/* <Link to="/confirmation">Подтвердить</Link> */}
