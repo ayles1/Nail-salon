@@ -4,7 +4,7 @@ import { useColorMode } from '../../Themes/ColorModeContext'
 import MaterialUISwitch from './MuiSwitchIcon'
 
 
-const ThemeSwitch = () => {
+function ThemeSwitch() {
     const {toggleColorMode} = useColorMode()
     
   return (
