@@ -1,5 +1,8 @@
-import { TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Button, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import enrollController from '../../../Controllers/Enroll/enroll.controller'
+import Example from '../UI/DatePicker/DatePicker'
 
 function EnrollDetails() {
     const [username, setUsername] = useState('')
@@ -7,12 +10,16 @@ function EnrollDetails() {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [requests, setRequests] = useState('')
 
+    let servicesList
+    useEffect(() => {
+        servicesList = enrollController.getServicesListSession()
+    }, [])
+
     function parsePhoneNumber(num) {
         return num.replace(/\D/g, '')
     }
 
     function handlePhoneNumberChange(event) {
-        // eslint-disable-next-line no-use-before-define
         const digits = parsePhoneNumber(event.target.value)
 
         let formatedPhoneNumber = ''
@@ -66,9 +73,10 @@ function EnrollDetails() {
                         handleNameChange(e)
                     }}
                     required
+                    inputProps={{ maxLength: '15' }}
                     label="Имя"
                 />
-                <TextField label="Фамилия" />
+                <TextField label="Фамилия" inputProps={{ maxLength: '20' }} />
                 <TextField
                     type="tel"
                     onChange={(e) => {
@@ -77,10 +85,13 @@ function EnrollDetails() {
                     value={phoneNumber}
                     required
                     inputProps={{ maxLength: '18' }}
-                    placeholder="Hello world"
                     label="Телефон"
                 />
-                <TextField label="Особые пожелания" />
+                <TextField multiline inputProps={{ maxLength: '70' }} label="Особые пожелания" />
+                <Example />
+                <Button variant="contained" sx={{ display: 'block' }}>
+                    <Link to="/enroll/submit">Подтвердить</Link>
+                </Button>
             </form>
         </div>
     )

@@ -24,10 +24,13 @@ const style = {
 }
 
 function EnrollModal() {
-    const navigation = useNavigate()
     const [servicesList, setServicesList] = useState([])
+    const [error, setError] = useState(false)
+
+    const navigation = useNavigate()
 
     function toggleServicesList(item) {
+        setError(false)
         setServicesList((list) => list.concat(item))
     }
     function handleWindowClose() {
@@ -38,7 +41,7 @@ function EnrollModal() {
     return (
         <Modal sx={{ overflow: 'auto' }} open onClose={handleWindowClose}>
             <Box sx={style}>
-                {pathname === '/enroll/details' ? ( // check current path and render details tab || services tab
+                {pathname !== '/enroll' ? ( // check current path and render details tab || services tab
                     <Outlet />
                 ) : (
                     <>
@@ -86,20 +89,25 @@ function EnrollModal() {
                                     0
                                 )}`}</div>
                             ) : null}
-                            <Button
-                                type="submit"
-                                onClick={async (e) => {
-                                    // Подтверждение записи, отправка на бекэнд
-                                    e.preventDefault()
-                                    // navigation("/confirmation/enroll")
-                                    // await enrollController.saveServicesListDB(servicesList)
-                                    // Изменить редирект на следующий таб с телефоном именем и датой
-                                    // handleWindowClose()
-                                }}
-                                variant="contained"
-                            >
+                            {error ? <div>*Пожалуйста, укажите услуги</div> : null}
+                            <Button type="submit" variant="contained">
                                 {/* <Link to="/confirmation">Подтвердить</Link> */}
-                                <Link to="/enroll/details">Подтвердить</Link>
+                                <Link
+                                    onClick={async (e) => {
+                                        const valid = servicesList.length > 0
+                                        // Подтверждение записи, отправка на бекэнд
+                                        // navigation("/confirmation/enroll")
+                                        if (!valid) {
+                                            e.preventDefault()
+                                            setError(true)
+                                        } else {
+                                            enrollController.saveServicesListSession(servicesList)
+                                        }
+                                    }}
+                                    to="/enroll/details"
+                                >
+                                    Подтвердить
+                                </Link>
                             </Button>
                         </form>
                     </>
