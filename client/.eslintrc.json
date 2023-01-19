@@ -21,7 +21,9 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "no-unused-vars":"off",
         "no-console":"off",
+        "import/no-extraneous-dependencies":"off",
         "react/prop-types" : [0],
+        "consistent-return":"off",
         "react/jsx-no-bind": [1,{"allowFunctions":true,"allowArrowFunctions":true,"allowBind":true}]
     }
 }

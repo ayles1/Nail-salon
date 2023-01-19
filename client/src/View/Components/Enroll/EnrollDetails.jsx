@@ -12,6 +12,7 @@ function EnrollDetails() {
     }
 
     function handlePhoneNumberChange(event) {
+        // eslint-disable-next-line no-use-before-define
         const digits = parsePhoneNumber(event.target.value)
 
         let formatedPhoneNumber = ''
@@ -49,7 +50,6 @@ function EnrollDetails() {
         } else {
             return setPhoneNumber(`+${digits}`)
         }
-        return setPhoneNumber(digits)
     }
 
     function handleNameChange(event) {

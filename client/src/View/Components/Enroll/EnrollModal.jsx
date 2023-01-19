@@ -1,22 +1,15 @@
 import React, { useState } from 'react'
 
-import {
-    Form,
-    Link,
-    Outlet,
-    redirect,
-    useNavigate,
-    useResolvedPath,
-} from 'react-router-dom'
+import { Form, Link, Outlet, useNavigate, useResolvedPath } from 'react-router-dom'
 
-import { Alert, Box, Button, Modal, Snackbar, Typography } from '@mui/material'
+import { Alert, Box, Button, Modal, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
 import AdditionalsList from './Additional.services-list'
 import ComplexList from './Complex.services-list'
 import ManicureList from './Manicure.services-list'
 import PedicureList from './Pedicure.services-list'
 
-import { enrollController } from '../../../Controllers/Enroll/enroll.controller'
+import enrollController from '../../../Controllers/Enroll/enroll.controller'
 
 const style = {
     position: 'absolute',
@@ -55,18 +48,10 @@ function EnrollModal() {
                         <form method="post">
                             <div>Выберите услуги :</div>
                             <ul>
-                                <ComplexList
-                                    chooseService={toggleServicesList}
-                                />
-                                <ManicureList
-                                    chooseService={toggleServicesList}
-                                />
-                                <PedicureList
-                                    chooseService={toggleServicesList}
-                                />
-                                <AdditionalsList
-                                    chooseService={toggleServicesList}
-                                />
+                                <ComplexList chooseService={toggleServicesList} />
+                                <ManicureList chooseService={toggleServicesList} />
+                                <PedicureList chooseService={toggleServicesList} />
+                                <AdditionalsList chooseService={toggleServicesList} />
                             </ul>
                             {servicesList.map((service, index) => (
                                 <Typography
@@ -82,9 +67,7 @@ function EnrollModal() {
                                         sx={{ cursor: 'pointer' }}
                                         onClick={() => {
                                             setServicesList((list) =>
-                                                list.filter(
-                                                    (item) => item !== service
-                                                )
+                                                list.filter((item) => item !== service)
                                             )
                                         }}
                                     />
