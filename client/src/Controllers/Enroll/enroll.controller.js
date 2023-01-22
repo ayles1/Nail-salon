@@ -6,8 +6,16 @@ class EnrollController {
         sessionStorage.setItem('Services', JSON.stringify(list))
     }
 
+    saveDetailsSession(details) {
+        sessionStorage.setItem('Details', JSON.stringify(details))
+    }
+
     getServicesListSession() {
         return JSON.parse(sessionStorage.getItem('Services'))
+    }
+
+    getDetailsSession() {
+        return JSON.parse(sessionStorage.getItem('Details'))
     }
 
     async saveServicesListDB(list) {

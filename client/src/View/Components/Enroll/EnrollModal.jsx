@@ -27,15 +27,20 @@ function EnrollModal() {
     const [servicesList, setServicesList] = useState([])
     const [error, setError] = useState(false)
 
-    const navigation = useNavigate()
+    const navigate = useNavigate()
 
     function toggleServicesList(item) {
+        setServicesList((list) => list.filter((elem) => elem !== item))
+        if (item.category !== 'additionals') {
+            setServicesList((list) => list.filter((elem) => elem.category !== item.category))
+        }
+
         setError(false)
         setServicesList((list) => list.concat(item))
     }
     function handleWindowClose() {
         // maybe some other features one day
-        navigation(-1)
+        navigate('/')
     }
     const { pathname } = useResolvedPath() // get current route to show right tab conditionally
     return (
@@ -90,13 +95,10 @@ function EnrollModal() {
                                 )}`}</div>
                             ) : null}
                             {error ? <div>*Пожалуйста, укажите услуги</div> : null}
-                            <Button type="submit" variant="contained">
-                                {/* <Link to="/confirmation">Подтвердить</Link> */}
+                            <Button type="submit" variant="contained" sx={{ marginTop: '20px' }}>
                                 <Link
                                     onClick={async (e) => {
                                         const valid = servicesList.length > 0
-                                        // Подтверждение записи, отправка на бекэнд
-                                        // navigation("/confirmation/enroll")
                                         if (!valid) {
                                             e.preventDefault()
                                             setError(true)

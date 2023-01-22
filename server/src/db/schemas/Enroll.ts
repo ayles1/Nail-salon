@@ -1,25 +1,34 @@
 import mongoose from "mongoose";
 
-const EnrollSchema = new mongoose.Schema(
-    {
-        name:{
-            type:Number,
-            required:true
-        },
-        phoneNumber:{
-            type: String,
-            required:true
-        },
-        date:{
-            type: Date,
-            required:true
-        },
-        specRequests:{
-            type: String,
-            
-            
-        }
-    }
-)
+type service = {
+  name: string;
+  desc: string;
+  price: number;
+  category: string;
+};
 
-export default mongoose.model("Enroll", EnrollSchema)
+const EnrollSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  meetingDate: {
+    type: Date,
+    required: true,
+  },
+  specialRequests: {
+    type: String,
+  },
+  userSurname: {
+    type: String,
+  },
+  servicesList: {
+    type: Array<service>,
+  },
+});
+
+export default mongoose.model("Enroll", EnrollSchema);

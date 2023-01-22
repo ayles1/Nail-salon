@@ -1,13 +1,7 @@
 import React from 'react'
 
 import { ExpandMore } from '@mui/icons-material'
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Box,
-    Typography,
-} from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import ChooseServiceButton from './ChooseServiceButton'
 
 const services = [
@@ -15,30 +9,31 @@ const services = [
         name: 'Маникюр 1',
         desc: 'Все все все',
         price: 223,
+        category: 'manicure',
     },
     {
         name: 'Маникюр 2',
         desc: 'Не все не все не все',
         price: 200,
+        category: 'manicure',
     },
     {
         name: 'Маникюр 3',
         desc: 'Ничего ничего ничего ',
         price: 4242,
+        category: 'manicure',
     },
     {
         name: 'Маникюр 4',
         desc: 'Что то что то что то',
         price: 5000,
+        category: 'manicure',
     },
 ]
 function ManicureList({ chooseService }) {
     return (
         <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMore />}
-                aria-controls="panel1a-content"
-            >
+            <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
                 <Typography>Маникюр</Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -53,10 +48,7 @@ function ManicureList({ chooseService }) {
                     >
                         <Typography component="h6">{service.name}</Typography>
                         <Typography>{service.desc}</Typography>
-                        <ChooseServiceButton
-                            value={service}
-                            chooseService={chooseService}
-                        />
+                        <ChooseServiceButton value={service} chooseService={chooseService} />
                     </Box>
                 ))}
             </AccordionDetails>
