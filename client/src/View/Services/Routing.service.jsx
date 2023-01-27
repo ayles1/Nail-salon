@@ -13,10 +13,12 @@ import ReviewItemList from '../Components/RatingTab/ReviewList'
 import WriteReviewModal from '../Components/RatingTab/WriteReviewModal'
 import EnrollDetails from '../Components/Enroll/EnrollDetails'
 import EnrollSubmit from '../Components/Enroll/EnrollSubmit'
+import NavbarMobile from '../Components/NavbarMobile'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
+            <Route path="/nav" element={<NavbarMobile />} />
             <Route path="/enroll" element={<EnrollModal />}>
                 <Route path="/enroll/details" element={<EnrollDetails />} />
                 <Route path="/enroll/submit" element={<EnrollSubmit />} />

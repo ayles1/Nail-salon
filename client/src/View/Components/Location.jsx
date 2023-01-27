@@ -1,24 +1,27 @@
 import React from 'react'
 
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import { useScroll } from '../Services/Scrolling.service'
 
 import EnrollButton from './Enroll/EnrollButton'
 
 function Location() {
     const { componentsRefs } = useScroll()
+    const widthQuery = useMediaQuery('(min-width:860px)')
     return (
         <Box
             ref={componentsRefs.address}
             sx={{
-                margin: '100px 0 0 0',
-                padding: '0 0 0 100px',
+                margin: '100px 0 30px 0',
+                padding: widthQuery ? '0 0 0 100px' : '0',
                 display: 'flex',
+                flexDirection: widthQuery ? 'row' : 'column',
+                gap: '15px',
                 justifyContent: 'space-evenly',
                 alignItems: 'center',
             }}
         >
-            <Box sx={{ width: '60%', marginBottom: '20px' }}>
+            <Box sx={{ width: widthQuery ? '60%' : '100%' }}>
                 <iframe
                     title="yandex-map"
                     src="https://yandex.ru/map-widget/v1/?um=constructor%3A52a79e81fcdeda05a7adae16fcf73e2581c314a7e03a62b594a47b9c236b16f2&amp;source=constructor"

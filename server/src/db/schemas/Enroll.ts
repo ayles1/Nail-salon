@@ -7,6 +7,15 @@ type service = {
   category: string;
 };
 
+export interface IEnroll {
+  username: string;
+  phoneNumber: string;
+  meetingDate: Date;
+  userSurname?: string;
+  specialRequests?: string;
+  servicesList: Array<service>;
+}
+
 const EnrollSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -28,7 +37,13 @@ const EnrollSchema = new mongoose.Schema({
   },
   servicesList: {
     type: Array<service>,
+    required: true,
   },
 });
 
-export default mongoose.model("Enroll", EnrollSchema);
+const Enroll = mongoose.model<IEnroll & mongoose.Document>(
+  "Enroll",
+  EnrollSchema
+);
+// export type EnrollType = typeof Enroll;
+export default Enroll;

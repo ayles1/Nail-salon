@@ -18,17 +18,13 @@ function Pricing() {
                 margin: '100px 0 0 0',
             }}
         >
-            <Typography
-                component="h1"
-                variant="h4"
-                sx={{ fontSize: '45px', marginBottom: '20px' }}
-            >
+            <Typography component="h1" variant="h4" sx={{ fontSize: '45px', marginBottom: '20px' }}>
                 Прайс лист
             </Typography>
             <Typography
                 component="img"
                 src="https://i.pinimg.com/564x/fd/09/3c/fd093cdb4d1d8e19e14c3d753c9cdce8.jpg"
-                sx={{ marginBottom: '30px' }}
+                sx={{ marginBottom: '30px', maxWidth: '100%' }}
             />
             <EnrollButton />
         </Box>

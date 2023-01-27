@@ -11,5 +11,5 @@ export class EnrollSendDto {
   servicesList: Array<service>;
   username: string;
   userSurname?: string;
-  specialRequests?: string;
+  requests?: string;
 }

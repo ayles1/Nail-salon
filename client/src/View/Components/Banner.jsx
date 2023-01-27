@@ -18,7 +18,7 @@ function Banner() {
                 alignItems: 'center',
             }}
         >
-            <Carousel width="60%" height="400px" autoPlayTime={5000} images={images} autoPlay />
+            <Carousel width="60%" height="100%" autoPlayTime={5000} images={images} autoPlay />
         </Box>
     )
 }

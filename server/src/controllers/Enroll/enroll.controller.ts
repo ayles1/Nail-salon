@@ -3,11 +3,13 @@ import Enroll from "../../db/schemas/Enroll";
 import { BaseController } from "../base.controller";
 import { EnrollSendDto } from "./dataTransferObject/enroll-send-dto";
 import { IEnrollController } from "./enroll.controller.interface";
+import { Bot } from "../../telegram-bot/bot";
+import { IBot } from "../../telegram-bot/bot.interface";
 export class EnrollController
   extends BaseController
   implements IEnrollController
 {
-  constructor() {
+  constructor(private Bot: IBot) {
     super();
     this.bindRoutes([
       {
@@ -30,10 +32,12 @@ export class EnrollController
         servicesList: req.body.servicesList,
         userSurname: req.body.userSurname,
         username: req.body.username,
-        specialRequests: req.body.specialRequests,
+        specialRequests: req.body.requests,
       });
       const post = await doc.save();
+
       res.json(post);
+      this.Bot.sendEnroll(post);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

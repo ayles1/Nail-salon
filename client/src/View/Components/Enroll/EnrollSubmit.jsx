@@ -50,7 +50,6 @@ function EnrollSubmit() {
                 variant="contained"
                 onClick={async () => {
                     const res = await enrollController.saveServicesListDB(enrollDetails)
-                    console.log(res)
                     navigate('/confirmation/enroll')
                 }}
             >

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import { Close, Dehaze } from '@mui/icons-material'
-import { Box, Typography, useMediaQuery } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Box, Modal, Typography, useMediaQuery } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom'
 import EnrollButton from './Enroll/EnrollButton'
 
 import { useScroll } from '../Services/Scrolling.service'
@@ -10,10 +10,8 @@ import { useScroll } from '../Services/Scrolling.service'
 function Navbar() {
     const widthQuery = useMediaQuery('(min-width:860px)')
     const { navigationRefs, handleClick } = useScroll()
-    const [showBurger, setShowBurger] = useState(true)
-    function handleBurgerClick() {
-        setShowBurger((prev) => !prev)
-    }
+    const navigate = useNavigate()
+
     return (
         <Typography component="nav">
             {widthQuery ? (
@@ -29,58 +27,29 @@ function Navbar() {
                     }}
                 >
                     <div ref={navigationRefs.portfolio}>
-                        <Link
-                            to="/#portfolio"
-                            onClick={() => handleClick('portfolio')}
-                        >
+                        <Link to="/#portfolio" onClick={() => handleClick('portfolio')}>
                             Портфолио
                         </Link>
                     </div>
                     <div ref={navigationRefs.pricing}>
-                        <Link
-                            to="/#pricing"
-                            onClick={() => handleClick('pricing')}
-                        >
+                        <Link to="/#pricing" onClick={() => handleClick('pricing')}>
                             Прайс и акции
                         </Link>
                     </div>
                     <div ref={navigationRefs.ratings}>
-                        <Link
-                            to="/#ratings"
-                            onClick={() => handleClick('ratings')}
-                        >
+                        <Link to="/#ratings" onClick={() => handleClick('ratings')}>
                             Отзывы
                         </Link>
                     </div>
                     <div ref={navigationRefs.address}>
-                        <Link
-                            to="/#address"
-                            onClick={() => handleClick('address')}
-                        >
+                        <Link to="/#address" onClick={() => handleClick('address')}>
                             Адрес
                         </Link>
                     </div>
                     <EnrollButton />
                 </Typography>
             ) : (
-                <Box>
-                    {showBurger ? (
-                        <Dehaze onClick={handleBurgerClick} />
-                    ) : (
-                        <Box
-                            sx={{
-                                width: '100vw',
-                                height: '100vh',
-                                backgroundColor: 'white',
-                                position: 'absolute',
-                                inset: 0,
-                                zIndex: '1000',
-                            }}
-                        >
-                            <Close onClick={handleBurgerClick} />
-                        </Box>
-                    )}
-                </Box>
+                <Dehaze onClick={() => navigate('/nav')} />
             )}
         </Typography>
     )

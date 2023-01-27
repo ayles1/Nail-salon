@@ -7,6 +7,7 @@ import { IDatabase } from "./db/database.interface";
 import { Database } from "./db/database";
 
 import Review from "./db/schemas/Review";
+import { Bot } from "./telegram-bot/bot";
 
 export class App {
   private app: Express;
@@ -39,7 +40,7 @@ export class App {
 
 const app = new App(
   new ReviewController(),
-  new EnrollController(),
+  new EnrollController(new Bot()),
   new Database()
 );
 app.init();
