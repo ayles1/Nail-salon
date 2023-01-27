@@ -27,7 +27,7 @@ export class Bot implements IBot {
         const services = enroll.servicesList.map((s) => s.name);
         this.bot.sendMessage(
           this.coreId,
-          `Новая запись!
+          `Новая запись!!!
           Имя : ${enroll.username}
           Фамилия : ${enroll.userSurname}
           Время записи : ${enroll.meetingDate}
@@ -38,7 +38,7 @@ export class Bot implements IBot {
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.log("pizda");
+        console.error(error.message);
       }
     }
   }
