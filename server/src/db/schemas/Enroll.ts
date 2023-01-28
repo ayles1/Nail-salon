@@ -45,5 +45,4 @@ const Enroll = mongoose.model<IEnroll & mongoose.Document>(
   "Enroll",
   EnrollSchema
 );
-// export type EnrollType = typeof Enroll;
 export default Enroll;

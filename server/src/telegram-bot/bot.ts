@@ -1,9 +1,12 @@
 import TelegramBot from "node-telegram-bot-api";
 import { IEnroll } from "../db/schemas/Enroll";
 import { IBot } from "./bot.interface";
+import { config } from "dotenv";
+
+config();
 
 export class Bot implements IBot {
-  token = "5906075342:AAGQdabZzeAm3ZJR_OG_6Q3Bb0uzre3Taaw";
+  token: string = process.env.API_KEY as string;
   bot = new TelegramBot(this.token, { polling: true });
   coreId: number;
   constructor() {

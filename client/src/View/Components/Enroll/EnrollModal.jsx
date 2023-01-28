@@ -10,6 +10,7 @@ import ManicureList from './Manicure.services-list'
 import PedicureList from './Pedicure.services-list'
 
 import enrollController from '../../../Controllers/Enroll/enroll.controller'
+import useManicureServices from '../../../hooks/services'
 
 const style = {
     position: 'absolute',
@@ -24,24 +25,15 @@ const style = {
 }
 
 function EnrollModal() {
-    const [servicesList, setServicesList] = useState([])
-    const [error, setError] = useState(false)
+    const {
+        servicesList,
+        error,
+        handleWindowClose,
+        toggleServicesList,
+        filterServices,
+        handleError,
+    } = useManicureServices()
 
-    const navigate = useNavigate()
-
-    function toggleServicesList(item) {
-        setServicesList((list) => list.filter((elem) => elem !== item))
-        if (item.category !== 'additionals') {
-            setServicesList((list) => list.filter((elem) => elem.category !== item.category))
-        }
-
-        setError(false)
-        setServicesList((list) => list.concat(item))
-    }
-    function handleWindowClose() {
-        // maybe some other features one day
-        navigate('/')
-    }
     const { pathname } = useResolvedPath() // get current route to show right tab conditionally
     return (
         <Modal sx={{ overflow: 'auto' }} open onClose={handleWindowClose}>
@@ -74,9 +66,7 @@ function EnrollModal() {
                                     <Close
                                         sx={{ cursor: 'pointer' }}
                                         onClick={() => {
-                                            setServicesList((list) =>
-                                                list.filter((item) => item !== service)
-                                            )
+                                            filterServices(service)
                                         }}
                                     />
                                 </Typography>
@@ -101,7 +91,7 @@ function EnrollModal() {
                                         const valid = servicesList.length > 0
                                         if (!valid) {
                                             e.preventDefault()
-                                            setError(true)
+                                            handleError()
                                         } else {
                                             enrollController.saveServicesListSession(servicesList)
                                         }

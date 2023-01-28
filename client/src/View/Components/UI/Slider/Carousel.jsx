@@ -55,7 +55,7 @@ function Carousel({ width, height, autoPlay, autoPlayTime, images }) {
     return (
         <>
             <div
-                style={{ width, height }}
+                style={{ width,height }}
                 className="slider"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
