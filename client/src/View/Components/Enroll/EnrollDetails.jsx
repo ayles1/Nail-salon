@@ -12,9 +12,6 @@ function EnrollDetails() {
         userSurname,
         phoneNumber,
         requests,
-        meetingDate,
-        servicesList,
-        navigate,
         validUsername,
         validPhoneNumber,
         handlePhoneNumberChange,
@@ -24,7 +21,6 @@ function EnrollDetails() {
         handleDateChange,
         handleSubmit,
     } = useDetails()
-    function handleFormSubmit(f) {}
     return (
         <div>
             <Typography variant="h5" component="h3" sx={{ marginBottom: '20px' }}>

@@ -14,7 +14,7 @@ function ReviewItemList() {
             setReviews(res.reverse())
             setLastReviews(res.slice(0, 2))
         })
-    }, [])
+    }, [reviews])
 
     return (
         <>
@@ -26,11 +26,13 @@ function ReviewItemList() {
                       <ReviewItem review={review} key={review.date} />
                   ))}
             {/* Link to all reviews is here */}
-            <ToggleRatingsButton
-                value={!showAllReviews ? 'Показать все' : 'Закрыть'}
-                linkTo="#reviews/this-site"
-                onClick={() => setShowAllReviews((prev) => !prev)}
-            />
+            <div style={{ marginTop: '20px' }}>
+                <ToggleRatingsButton
+                    value={!showAllReviews ? 'Показать все' : 'Закрыть'}
+                    linkTo="#reviews"
+                    onClick={() => setShowAllReviews((prev) => !prev)}
+                />
+            </div>
         </>
     )
 }

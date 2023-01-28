@@ -6,27 +6,6 @@ import { useScroll } from '../../Services/Scrolling.service'
 
 import ToggleRatingsButton from './ToggleRatingsButton'
 import ReviewItemList from './ReviewList'
-import AvitoReviewList from './AvitoReviewList'
-
-function TabPanel(props) {
-    const { value, index, children } = props
-    return (
-        <div>
-            {value === index && (
-                <Typography
-                    component="div"
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    {children}
-                </Typography>
-            )}
-        </div>
-    )
-}
 
 function Ratings() {
     const [value, setValue] = useState(0)
@@ -48,40 +27,19 @@ function Ratings() {
                 margin: '100px 0 0 0',
             }}
         >
-            <Typography
-                component="h1"
-                variant="h4"
-                sx={{ fontSize: '45px', marginBottom: '30px' }}
-            >
+            <Typography component="h1" variant="h4" sx={{ fontSize: '45px', marginBottom: '30px' }}>
                 Отзывы
             </Typography>
 
             {/* Tabs and their routings declaration */}
-            <Tabs onChange={handleChange} value={value}>
-                <Tab
-                    label="Этот сайт"
-                    onClick={() => navigate('/#reviews/this-site')}
-                 />
-                <Tab
-                    label="Avito"
-                    onClick={() => navigate('/#reviews/avito')}
-                />
-            </Tabs>
 
             {/* Tabs realization */}
-            <TabPanel value={value} index={0}>
-                <ReviewItemList />
-                <div>Уже были у меня? Напишите отзыв!</div>
 
-                {/* Link to review modal is there */}
-                <ToggleRatingsButton
-                    value="Оставить отзыв !"
-                    linkTo="postreview"
-                />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <AvitoReviewList />
-            </TabPanel>
+            <ReviewItemList />
+            <div style={{ margin: '20px 0' }}>Уже были у меня? Напишите отзыв!</div>
+
+            {/* Link to review modal is there */}
+            <ToggleRatingsButton value="Оставить отзыв !" linkTo="postreview" />
         </Box>
     )
 }

@@ -7,37 +7,52 @@ import {
     AccordionSummary,
     Rating,
     Typography,
+    useMediaQuery,
 } from '@mui/material'
+import { Box } from '@mui/system'
 
 function ReviewItem({ review }) {
     const [open, setOpen] = useState(false)
+
+    const widthQuery = useMediaQuery('(min-width:860px)')
+
     function parseDate(value) {
         const date = new Date(value)
         return ` ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
     }
+
     function parseTime(value) {
         const date = new Date(value)
         return `${date.getHours()}:${date.getMinutes()}`
     }
     return (
-        <Accordion sx={{ width: '100%' }}>
+        <Accordion sx={{ width: '60%' }}>
             <AccordionSummary
                 expandIcon={<ExpandMore />}
                 onClick={() => setOpen((prev) => !prev)}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-                sx={{ justifyContent: 'space-between' }}
+                sx={
+                    widthQuery
+                        ? { padding: '0 10px', justifyContent: 'space-between' }
+                        : { padding: '0 10px', flexDirection: 'column' }
+                }
             >
-                <Typography>{review.text}</Typography>
-                {!open ? (
-                    <Typography>
-                        <Rating
-                            name="read-only"
-                            value={review.rating}
-                            readOnly
-                        />
-                    </Typography>
-                ) : null}
+                <Box>
+                    {!open ? (
+                        <>
+                            <Typography sx={{ maxWidth: '100%' }}>{review.text}</Typography>
+                            <Typography>
+                                <Rating
+                                    name="read-only"
+                                    value={review.rating}
+                                    readOnly
+                                    sx={{ maxWidth: '100%' }}
+                                />
+                            </Typography>
+                        </>
+                    ) : null}
+                </Box>
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>{review.text}</Typography>
