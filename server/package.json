@@ -2,7 +2,7 @@
   "name": "manicure-shop-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/app.js",
   "type": "commonjs",
   "scripts": {
     "start": "node ./dist/app.js",
