@@ -1,10 +1,8 @@
 import TelegramBot from "node-telegram-bot-api";
 import { IEnroll } from "../db/schemas/Enroll";
 import { IBot } from "./bot.interface";
-import { config } from "dotenv";
-import TelegramAdmin from "../db/schemas/TelegramAdmin";
 
-config();
+import TelegramAdmin from "../db/schemas/TelegramAdmin";
 
 export class Bot implements IBot {
   token: string = process.env.API_KEY as string;

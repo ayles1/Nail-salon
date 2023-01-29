@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import cors from "cors";
 import path from "path";
 import { json } from "body-parser";
@@ -7,6 +7,9 @@ import { EnrollController } from "./controllers/Enroll/enroll.controller";
 import { IDatabase } from "./db/database.interface";
 import { Database } from "./db/database";
 import { Bot } from "./telegram-bot/bot";
+import { config } from "dotenv";
+
+config();
 
 export class App {
   private app: Express;
@@ -17,7 +20,7 @@ export class App {
     private Database: IDatabase
   ) {
     this.app = express();
-    this.port = 3000;
+    this.port = Number(process.env.port) || 3000;
   }
 
   private useRoutes(): void {
