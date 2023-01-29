@@ -10,8 +10,8 @@ export class Bot implements IBot {
   bot = new TelegramBot(this.token, { polling: true });
 
   constructor() {
-    console.log(token);
-    console.log(bot);
+    console.log(this.token);
+    console.log(this.bot);
     this.bot.setMyCommands([
       { command: "/start", description: "Начальное приветствие" },
       { command: "/verify", description: "Верификация" },
