@@ -2,7 +2,7 @@ class ReviewController {
     reviews = []
 
     async getReviews() {
-        const res = await fetch('http://localhost:8000/reviews/get', {
+        const res = await fetch('/reviews/get', {
             method: 'GET',
         })
         this.reviews = await res.json()
@@ -10,7 +10,7 @@ class ReviewController {
     }
 
     async sendReview(data) {
-        const res = await fetch('http://localhost:8000/reviews/send', {
+        const res = await fetch('/reviews/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify(data),

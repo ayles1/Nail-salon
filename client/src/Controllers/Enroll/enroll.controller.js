@@ -19,7 +19,7 @@ class EnrollController {
     }
 
     async saveServicesListDB(list) {
-        const res = await fetch('http://localhost:8000/enroll/send', {
+        const res = await fetch('/enroll/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify(list),
