@@ -32,11 +32,15 @@ export class App {
     this.app.use(json());
   }
   private useStatic(): void {
-    this.app.use(express.static(path.join(__dirname, "./client/build")));
+    this.app.use(express.static(path.join(__dirname, "../client/build")));
+    console.log(path.join(__dirname, "../client/build"));
     this.app.get("*", (_, res) => {
-      res.sendFile(path.join(__dirname, "./client/build/index.html"), (err) => {
-        res.status(500).send(err);
-      });
+      res.sendFile(
+        path.join(__dirname, "../client/build/index.html"),
+        (err) => {
+          res.status(500).send(err);
+        }
+      );
     });
   }
   public init(): void {

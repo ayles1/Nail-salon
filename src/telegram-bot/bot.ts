@@ -11,7 +11,6 @@ export class Bot implements IBot {
 
   constructor() {
     console.log(this.token);
-    console.log(this.bot);
     this.bot.setMyCommands([
       { command: "/start", description: "Начальное приветствие" },
       { command: "/verify", description: "Верификация" },
