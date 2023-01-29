@@ -1,0 +1,21 @@
+{
+  "name": "manicure-shop",
+  "version": "1.0.0",
+  "description": "This is a simple website im trying to build for my girlfriend",
+  "main": "server/dist/app.js",
+  "scripts": {
+    "build": "echo \"No build specified\" && exit 1",
+    "test": "echo \"No test specified\" && exit 1",
+    "start": "node server/dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayles1/Nails-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayles1/Nails-shop/issues"
+  },
+  "homepage": "https://github.com/ayles1/Nails-shop#readme"
+}
