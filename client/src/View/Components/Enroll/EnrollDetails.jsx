@@ -1,13 +1,7 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import React from 'react'
-import {
-    validatePhoneNumber,
-    validateUsername,
-} from '../../../helpers/validations/Enroll.validation'
 import useDetails from '../../../hooks/details'
 import DatePickerUI from '../UI/DatePicker/DatePicker'
-import enrollController from '../../../Controllers/Enroll/enroll.controller'
 
 function EnrollDetails() {
     const {

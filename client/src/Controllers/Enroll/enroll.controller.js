@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 class EnrollController {
     servicesList = []
 
@@ -19,7 +18,11 @@ class EnrollController {
     }
 
     async saveServicesListDB(list) {
-        const res = await fetch('/enroll/send', {
+        const url =
+            process.env.NODE_ENV === 'development'
+                ? 'http://localhost:9000/enroll/send'
+                : '/enroll/send'
+        const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify(list),

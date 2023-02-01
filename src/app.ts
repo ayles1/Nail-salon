@@ -32,20 +32,24 @@ export class App {
     this.app.use(json());
   }
   private useStatic(): void {
-    this.app.use(express.static(path.join(__dirname, "../client/build")));
-    this.app.get("*", (_, res) => {
-      res.sendFile(
-        path.join(__dirname, "../client/build/index.html"),
-        (err) => {
-          res.status(500).send(err);
-        }
-      );
-    });
+    if (process.env.NODE_ENV === "development") {
+      return;
+    } else {
+      this.app.use(express.static(path.join(__dirname, "../client/build")));
+      this.app.get("*", (_, res) => {
+        res.sendFile(
+          path.join(__dirname, "../client/build/index.html"),
+          (err) => {
+            res.status(500).send(err);
+          }
+        );
+      });
+    }
   }
   public init(): void {
     this.useMiddleware();
     this.useRoutes();
-    process.env.SHOULD_RUN_STATIC ? this.useStatic() : null;
+    this.useStatic();
     this.app.listen(this.port);
     this.Database.init();
     console.log(`Приложение запущено на ${this.port} порте`);

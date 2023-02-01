@@ -2,7 +2,11 @@ class ReviewController {
     reviews = []
 
     async getReviews() {
-        const res = await fetch('/reviews/get', {
+        const url =
+            process.env.NODE_ENV === 'development'
+                ? 'http://localhost:9000/reviews/get'
+                : '/reviews/get'
+        const res = await fetch(url, {
             method: 'GET',
         })
         this.reviews = await res.json()
@@ -10,7 +14,11 @@ class ReviewController {
     }
 
     async sendReview(data) {
-        const res = await fetch('/reviews/send', {
+        const url =
+            process.env.NODE_ENV === 'development'
+                ? 'http://localhost:9000/reviews/send'
+                : '/reviews/send'
+        const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify(data),
