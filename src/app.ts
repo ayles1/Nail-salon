@@ -38,6 +38,7 @@ export class App {
       res.sendFile(
         path.join(__dirname, "../client/build/index.html"),
         (err) => {
+          
           res.status(500).send(err);
         }
       );

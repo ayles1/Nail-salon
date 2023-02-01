@@ -55,11 +55,13 @@ export class Bot implements IBot {
             if (err) {
               console.log(err);
             } else {
+              pipelineStep = 0;
               return this.bot.sendMessage(chatId, "Вы успешно верифицированны");
             }
           });
         } else if (text !== "привет") {
-          this.bot.sendMessage(
+          pipelineStep;
+          return this.bot.sendMessage(
             chatId,
             "Неправильный код верификации, попробуйте другой"
           );
