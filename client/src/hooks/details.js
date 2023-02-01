@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import enrollController from '../Controllers/Enroll/enroll.controller'
-import { validatePhoneNumber, validateUsername } from '../Validations/Enroll.validation'
+import { validatePhoneNumber, validateUsername } from '../helpers/validations/Enroll.validation'
 
 export default function useDetails() {
     const [username, setUsername] = useState('')

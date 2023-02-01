@@ -33,12 +33,10 @@ export class App {
   }
   private useStatic(): void {
     this.app.use(express.static(path.join(__dirname, "../client/build")));
-    console.log(path.join(__dirname, "../client/build"));
     this.app.get("*", (_, res) => {
       res.sendFile(
         path.join(__dirname, "../client/build/index.html"),
         (err) => {
-          
           res.status(500).send(err);
         }
       );
@@ -47,7 +45,7 @@ export class App {
   public init(): void {
     this.useMiddleware();
     this.useRoutes();
-    this.useStatic();
+    process.env.SHOULD_RUN_STATIC ? this.useStatic() : null;
     this.app.listen(this.port);
     this.Database.init();
     console.log(`Приложение запущено на ${this.port} порте`);

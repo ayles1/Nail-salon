@@ -2,19 +2,12 @@ import React, { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import {
-    Box,
-    Button,
-    Modal,
-    Rating,
-    TextField,
-    Typography,
-} from '@mui/material'
+import { Box, Button, Modal, Rating, TextField, Typography } from '@mui/material'
 import reviewController from '../../../Controllers/Review/review.controller'
 import {
     validateReviewText,
     validateReviewRating,
-} from '../../../Validations/Review.validation'
+} from '../../../helpers/validations/Review.validation'
 
 const modalStyle = {
     position: 'absolute',
@@ -53,9 +46,7 @@ function WriteReviewModal() {
                     <TextField
                         sx={{ margin: '20px 0' }}
                         error={!isValidText}
-                        helperText={
-                            isValidText ? null : 'Неверный формат текста'
-                        }
+                        helperText={isValidText ? null : 'Неверный формат текста'}
                         name="text"
                         focused
                         multiline
@@ -65,9 +56,7 @@ function WriteReviewModal() {
                         onChange={(e) => handleTextChange(e)}
                     />
                     <div>
-                        <Typography component="legend">
-                            Ваша оценка :
-                        </Typography>
+                        <Typography component="legend">Ваша оценка :</Typography>
                         <Rating
                             name="rating"
                             value={rating}

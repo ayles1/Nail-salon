@@ -7,10 +7,13 @@ import TelegramAdmin from "../db/schemas/TelegramAdmin";
 export class Bot implements IBot {
   token: string = process.env.API_KEY as string;
 
-  bot = new TelegramBot(this.token, { polling: true });
+  bot = new TelegramBot(this.token, {
+    polling: {
+      interval: 5000,
+    },
+  });
 
   constructor() {
-    console.log(this.token);
     this.bot.setMyCommands([
       { command: "/start", description: "Начальное приветствие" },
       { command: "/verify", description: "Верификация" },

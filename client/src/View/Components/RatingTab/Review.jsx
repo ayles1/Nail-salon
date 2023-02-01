@@ -10,21 +10,13 @@ import {
     useMediaQuery,
 } from '@mui/material'
 import { Box } from '@mui/system'
+import { parseDate, parseTime } from '../../../helpers/time-parse'
 
 function ReviewItem({ review }) {
     const [open, setOpen] = useState(false)
 
     const widthQuery = useMediaQuery('(min-width:860px)')
 
-    function parseDate(value) {
-        const date = new Date(value)
-        return ` ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
-    }
-
-    function parseTime(value) {
-        const date = new Date(value)
-        return `${date.getHours()}:${date.getMinutes()}`
-    }
     return (
         <Accordion sx={{ width: '60%' }}>
             <AccordionSummary
